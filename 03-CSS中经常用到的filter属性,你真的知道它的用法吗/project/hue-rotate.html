@@ -1,0 +1,35 @@
+<!--
+ * @Author: wangzhiyu
+ * @Date: 2023-04-29 16:44:02
+ * @LastEditors: DESKTOP-NOV61E3
+ * @LastEditTime: 2024-02-22 16:31:29
+ * @Description: 色相旋转
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>色相旋转</title>
+    <style>
+      body,
+      html {
+        display: flex;
+        justify-content: center;
+      }
+      .box {
+        width: 500px;
+        height: 500px;
+        margin: 100px 0;
+        background-color: red;
+
+        /* filter: hue-rotate(色相旋转) 色相旋转默认为0 */
+        filter: hue-rotate(90deg);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

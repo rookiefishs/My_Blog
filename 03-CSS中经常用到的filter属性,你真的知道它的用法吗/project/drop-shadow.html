@@ -1,0 +1,37 @@
+<!--
+ * @Author: wangzhiyu
+ * @Date: 2023-04-29 16:41:43
+ * @LastEditors: DESKTOP-NOV61E3
+ * @LastEditTime: 2024-02-22 16:27:13
+ * @Description: 生成轮廓阴影
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>生成轮廓阴影</title>
+  <style>
+    body,
+    html {
+      display: flex;
+      justify-content: center;
+    }
+
+    img {
+      margin: 100px 0;
+      /* 直接添加box-shadow只会给盒子添加阴影,阴影并不会作用到内部的图像中 */
+      /* box-shadow: 10px 10px 5px #888888; */
+      /* filter: drop-shadow(水平偏移量 垂直偏移量 模糊度 阴影颜色) 模糊度默认为0,阴影颜色默认为黑色 */
+      filter: drop-shadow(10px 10px 10px rgba(0, 0, 0, 0.5));
+    }
+  </style>
+</head>
+
+<body>
+  <img src="./images/demo2.png" alt="" />
+</body>
+
+</html>

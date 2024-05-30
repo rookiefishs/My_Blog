@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./base.css" />
+    <link rel="stylesheet" href="./user.css" />
+    <title>Document</title>
+  </head>
+
+  <body>
+    <div class="chatBody"></div>
+    <div class="chatBox">
+      <input type="text" name="" id="" cols="30" rows="10" placeholder="请输入内容" class="textarea" />
+      <div class="btn">发送</div>
+    </div>
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      const btn = document.querySelector('.btn');
+      const textarea = document.querySelector('.textarea');
+      const chatBody = document.querySelector('.chatBody');
+      const imgList = ['./img/user1.jpg', './img/user2.jpg', './img/user3.jpg', './img/user4.jpg'];
+      const ws = io('http://localhost:3000');
+
+      ws.on('news', data => {
+        if (data.user === 2) return;
+        chatBody.innerHTML += generateStr('left', imgList[data.user - 1], data.content, data.time);
+      });
+      ws.onopen = function () {
+        console.log(ws.readyState, '连接成功');
+      };
+      ws.onclose = function () {
+        console.log('取消连接');
+      };
+      ws.onerror = function (err) {
+        console.log('连接错误', err);
+      };
+      ws.onmessage = function (msg) {
+        console.log('接收消息msg', msg);
+      };
+      let str = '';
+      // textarea输入内容时触发
+      textarea.addEventListener('input', e => {
+        str = textarea.value;
+      });
+
+      // 发布消息函数
+      const publicMessage = () => {
+        if (str.trim().length !== 0) {
+          chatBody.innerHTML += generateStr('right', imgList[1], str, new Date());
+          ws.emit('sendMsg', {
+            content: str,
+            user: 2,
+            time: new Date(),
+          });
+        }
+        str = '';
+        textarea.value = '';
+        chatBody.scrollTo({
+          top: chatBody.scrollHeight,
+          behavior: 'smooth',
+        });
+      };
+      textarea.addEventListener('keydown', e => {
+        if (e.keyCode === 13) {
+          // 发布
+          publicMessage();
+        }
+      });
+
+      // 生成html字符串,用于填充进chatBody中
+      const generateStr = (type, img, value, time) => {
+        return type === 'right'
+          ? `<div class="right">
+                <div class="text">
+                  <p>${value}</p>
+                  <p>${format(time, 'yyyy-MM-dd hh:mm:ss')}</p>
+                 </div>
+              <img src="${img}" alt="" />
+             </div>`
+          : `<div class="left">
+              <img src="${img}" alt="" />
+                <div class="text">
+                  <p>${value}</p>
+                  <p>${format(time, 'yyyy-MM-dd hh:mm:ss')}</p>
+                </div>
+             </div>`;
+      };
+
+      // 点击发布时触发
+      btn.addEventListener('click', publicMessage);
+
+      // 日期格式化函数
+      function format(date, fmt) {
+        if (date instanceof Date) return '';
+        let time = new Date(date);
+        const o = {
+          'M+': time.getMonth() + 1,
+          'd+': time.getDate(),
+          'h+': time.getHours(),
+          'm+': time.getMinutes(),
+          's+': time.getSeconds(),
+          'q+': Math.floor((time.getMonth() + 3) / 3),
+          S: time.getMilliseconds(),
+        };
+        if (/(y+)/.test(fmt)) {
+          fmt = fmt.replace(RegExp.$1, (time.getFullYear() + '').substr(4 - RegExp.$1.length));
+        }
+        for (let k in o) {
+          if (new RegExp('(' + k + ')').test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ('00' + o[k]).substr(('' + o[k]).length));
+          }
+        }
+        return fmt;
+      }
+    </script>
+  </body>
+</html>

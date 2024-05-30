@@ -1,0 +1,36 @@
+<!--
+ * @Author: wangzhiyu
+ * @Date: 2023-04-29 16:44:02
+ * @LastEditors: DESKTOP-NOV61E3
+ * @LastEditTime: 2024-02-22 17:02:20
+ * @Description: 深褐色
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>深褐色</title>
+    <style>
+      body,
+      html {
+        display: flex;
+        justify-content: center;
+      }
+      .box {
+        width: 500px;
+        height: 500px;
+        margin: 100px 0;
+        background-color: red;
+
+        /* filter: sepia(深褐色) 深褐色默认为0 */
+        /* filter: filter: contrast(175%) brightness(103%);; */
+        filter: contrast(75%) brightness(33%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

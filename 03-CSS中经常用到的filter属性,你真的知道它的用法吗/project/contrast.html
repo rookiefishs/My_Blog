@@ -1,0 +1,35 @@
+<!--
+ * @Author: wangzhiyu
+ * @Date: 2023-04-29 16:41:43
+ * @LastEditors: DESKTOP-NOV61E3
+ * @LastEditTime: 2024-02-22 16:31:21
+ * @Description: 对比度
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>对比度</title>
+    <style>
+      body,
+      html {
+        display: flex;
+        justify-content: center;
+      }
+      .box {
+        width: 500px;
+        height: 500px;
+        margin: 100px 0;
+        background-color: red;
+
+        /* filter: contrast(对比度) 对比度默认为1 */
+        filter: contrast(0.4);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

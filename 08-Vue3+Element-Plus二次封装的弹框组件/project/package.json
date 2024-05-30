@@ -1,0 +1,43 @@
+{
+  "name": "welding_robot",
+  "private": true,
+  "version": "1.1.1",
+  "main": "",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "autofit.js": "^3.0.6",
+    "axios": "^1.6.2",
+    "element-plus": "2.2.29",
+    "sass": "^1.58.3",
+    "sortablejs": "^1.15.1",
+    "vue": "^3.2.16"
+  },
+  "devDependencies": {
+    "simple-keyboard": "^3.7.30",
+    "@vitejs/plugin-vue": "^4.0.0",
+    "concurrently": "^7.6.0",
+    "cross-env": "^7.0.3",
+    "element-plus": "2.2.29",
+    "vite": "^4.1.0",
+    "vite-plugin-html": "^3.2.0",
+    "vue-router": "^4.1.6",
+    "vuex": "^4.1.0",
+    "wait-on": "^7.0.1"
+  },
+  "build": {
+    "appId": "com.iimt.kangyang-app",
+    "productName": "kangyang-app",
+    "copyright": "Copyright © 2022 Iimt-Cloud",
+    "mac": {
+      "category": "com.iimt.kangyang-app"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}

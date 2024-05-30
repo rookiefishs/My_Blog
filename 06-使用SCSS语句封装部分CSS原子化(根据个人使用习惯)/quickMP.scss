@@ -1,0 +1,38 @@
+// TODO: 这里用于生成 margin 与 padding 各个方向的边距 1-$max的css
+
+// 定义变量
+$prefix: 'm'; // 类名前缀
+$directions: (
+  // 方向缩写与属性值的映射关系（左）
+  'l': 'left',
+  // 方向缩写与属性值的映射关系（右）
+  'r': 'right',
+  // 方向缩写与属性值的映射关系（底部）
+  'b': 'bottom',
+  // 方向缩写与属性值的映射关系（顶部）
+  't': 'top'
+);
+$step: 1; // 步长
+$max: 200; // 最大值
+$properties: (
+  // 属性缩写与属性名称的映射关系（外边距）
+  'm': 'margin',
+  // 属性缩写与属性名称的映射关系（内边距）
+  'p': 'padding'
+);
+
+// 循环生成margin,padding设置语句
+@each $dirKey, $dirValue in $directions {
+  @for $i from 1 through ceil($max / $step) {
+    @each $propKey, $propValue in $properties {
+      // 组合生成类名
+      $className: $propKey + $dirKey + $i * $step;
+      .#{$className} {
+        #{$propValue}-#{$dirValue}: #{$i * $step}px;
+      }
+      .#{$className}I {
+        #{$propValue}-#{$dirValue}: #{$i * $step}px !important;
+      }
+    }
+  }
+}

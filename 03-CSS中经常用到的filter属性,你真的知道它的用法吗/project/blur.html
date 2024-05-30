@@ -1,0 +1,35 @@
+<!--
+ * @Author: wangzhiyu
+ * @Date: 2023-04-29 16:41:43
+ * @LastEditors: DESKTOP-NOV61E3
+ * @LastEditTime: 2024-02-22 16:11:34
+ * @Description: 模糊度
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>模糊度</title>
+    <style>
+      body,
+      html {
+        display: flex;
+        justify-content: center;
+      }
+      .box {
+        width: 500px;
+        height: 500px;
+        margin: 100px 0;
+        background-color: red;
+
+        /* filter: blur(模糊度) 模糊度默认为0 */
+        filter: blur(10px);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"></div>
+  </body>
+</html>

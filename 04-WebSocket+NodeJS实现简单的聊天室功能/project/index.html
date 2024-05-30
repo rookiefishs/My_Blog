@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ws聊天室</title>
+    <link href="/public/base.css" />
+    <style>
+      .title {
+        text-align: center;
+        margin-top: 100px;
+      }
+      .userList {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        flex-wrap: wrap;
+      }
+      .userList li {
+        flex: 1;
+        float: left;
+        margin: 20px;
+        background-color: #5bd1d7;
+        text-align: center;
+        border-radius: 20px;
+        line-height: 200px;
+        cursor: pointer;
+      }
+      .userList li a {
+        display: block;
+        width: 100%;
+        height: 100%;
+        color: #515bd4;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 class="title">请选择您的角色</h1>
+    <ul class="userList">
+      <li><a href="/user1">user1</a></li>
+      <li><a href="/user2">user2</a></li>
+      <li><a href="/user3">user3</a></li>
+      <li><a href="/user4">user4</a></li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,8 @@
+system:
+  isDev: false
+  webSocketUrl: 'ws://localhost:6789'
+
+hand:
+  defaultSpeed: 30
+  installPos: [ 0.037, -1.8008, 1.7683, -1.7463, -1.5237, 1.4677 ]
+  restartPos: [ 0.086,-2.8691,2.0165 ,-1.5753,-1.5564,-1.6399 ]

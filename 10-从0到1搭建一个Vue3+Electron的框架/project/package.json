@@ -1,0 +1,30 @@
+{
+  "name": "vue3-electron",
+  "private": true,
+  "version": "0.0.0",
+  "main": "electron/index.js",
+  "scripts": {
+    "dev": "vite dev",
+    "build": "vite build",
+    "electron:start": " concurrently -k \"vite \" \"cross-env IS_DEV=true electron . \"",
+    "electron:build.win": "electron-builder --win --dir"
+  },
+  "dependencies": {
+    "vue": "^3.4.21"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.0.4",
+    "concurrently": "7.6.0",
+    "cross-env": "7.0.3",
+    "electron": "23.0.0",
+    "electron-browser-storage": "1.0.7",
+    "electron-builder": "23.6.0",
+    "electron-packager": "17.1.1",
+    "vite": "^5.2.0"
+  },
+  "build": {
+    "directories": {
+      "output": "dist_electron"
+    }
+  }
+}
