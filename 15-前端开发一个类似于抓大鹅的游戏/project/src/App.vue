@@ -1,7 +1,7 @@
 <!--
  * @Author: wangZhiyu <w3209605851@163.com>
  * @Date: 2024-05-09 15:27:54
- * @LastEditTime: 2024-05-12 00:42:07
+ * @LastEditTime: 2024-06-26 09:15:52
  * @LastEditors: wangZhiyu <w3209605851@163.com>
 -->
 <template>
@@ -136,7 +136,7 @@ controls.target = new THREE.Vector3(0, 3, 0);
 // 创建实时调试工具
 const gui = new dat.GUI();
 // 默认关闭调试器
-gui.close()
+gui.close();
 // 调试工具内容
 const guiObj = {
   // 是否开启物理世界调试工具
@@ -174,18 +174,20 @@ function initPlaneBox() {
         // 平面的角度设置
         rotation: [-Math.PI / 2, 0, 0],
         // 平面的位置设置
-        position: null,
+        position: [0, 0.25, 0],
       },
       {
         rotation: null,
-        position: [0.5, boxSize / 2, -boxSize / 2],
+        position: [0.25, boxSize / 2, -boxSize / 2 - 0.25],
+        depth: 0.5,
       },
       {
         rotation: [0, -Math.PI, 0],
-        position: [0.5, boxSize / 2, boxSize / 2],
+        position: [0.25, boxSize / 2, boxSize / 2 + 0.25],
+        depth: 0.5,
       },
-      { rotation: [0, -Math.PI / 2, 0], position: [boxSize / 2, boxSize / 2, 0] },
-      { depth: 1, rotation: [0, Math.PI / 2, 0], position: [-boxSize / 2, boxSize / 2, 0] },
+      { rotation: [0, -Math.PI / 2, 0], position: [boxSize / 2 + 0.25, boxSize / 2, 0], depth: 1 },
+      { depth: 1, rotation: [0, Math.PI / 2, 0], position: [-boxSize / 2 - 0.25, boxSize / 2, 0] },
     ],
   };
 
@@ -194,7 +196,7 @@ function initPlaneBox() {
     // 创建3D场景中的平面,用于表示分隔板
     const plane = new THREE.Mesh(
       // 创建平面立方体
-      new THREE.BoxGeometry(planeData.size + (item.depth || 0), planeData.size, 1),
+      new THREE.BoxGeometry(planeData.size + (item.depth || 0), planeData.size, 0.5),
       // 创建平面材质
       new THREE.MeshStandardMaterial({
         color: planeData.color,
@@ -214,36 +216,6 @@ function initPlaneBox() {
   });
 }
 initPlaneBox();
-
-// 创建全局平行光以及平行光的辅助对象
-function initLight() {
-  // 创建平行光
-  const directionLight = new THREE.DirectionalLight();
-  // 设置平行光投射阴影
-  directionLight.castShadow = true;
-  // 设置平行光的位置
-  directionLight.position.set(5, 5, 6);
-
-  // 设置平行光相机离视锥体的近端的距离
-  directionLight.shadow.camera.near = 1;
-  // 设置平行光相机离视锥体的远端的距离
-  directionLight.shadow.camera.far = 20;
-  // 设置阴影相机视锥体的顶部距离
-  directionLight.shadow.camera.top = 10;
-  // 设置阴影相机视锥体的右侧距离
-  directionLight.shadow.camera.right = 10;
-  // 设置阴影相机视锥体的底部距离
-  directionLight.shadow.camera.bottom = -10;
-  // 设置阴影相机视锥体的左侧距离
-  directionLight.shadow.camera.left = -10;
-
-  // 创建环境光
-  const ambientLight = new THREE.AmbientLight(new THREE.Color('#ffffff'), 0.4);
-
-  // 添加环境光+平行光到场景中
-  scene.add(ambientLight, directionLight);
-}
-initLight();
 
 // 创建物理世界的平面,语D世界中的平面一起形成一个开口的盒子
 function initPhysicalWorldPlane() {
@@ -277,7 +249,7 @@ function initPhysicalWorldPlane() {
           rotation: [1, 0, 0],
           angle: -Math.PI / 2,
         },
-        position: [0, -0.05, 0],
+        position: [0, 0.5, 0],
       },
       {
         axis: null,
@@ -326,6 +298,36 @@ function initPhysicalWorldPlane() {
   });
 }
 initPhysicalWorldPlane();
+
+// 创建全局平行光以及平行光的辅助对象
+function initLight() {
+  // 创建平行光
+  const directionLight = new THREE.DirectionalLight();
+  // 设置平行光投射阴影
+  directionLight.castShadow = true;
+  // 设置平行光的位置
+  directionLight.position.set(5, 5, 6);
+
+  // 设置平行光相机离视锥体的近端的距离
+  directionLight.shadow.camera.near = 1;
+  // 设置平行光相机离视锥体的远端的距离
+  directionLight.shadow.camera.far = 20;
+  // 设置阴影相机视锥体的顶部距离
+  directionLight.shadow.camera.top = 10;
+  // 设置阴影相机视锥体的右侧距离
+  directionLight.shadow.camera.right = 10;
+  // 设置阴影相机视锥体的底部距离
+  directionLight.shadow.camera.bottom = -10;
+  // 设置阴影相机视锥体的左侧距离
+  directionLight.shadow.camera.left = -10;
+
+  // 创建环境光
+  const ambientLight = new THREE.AmbientLight(new THREE.Color('#ffffff'), 0.4);
+
+  // 添加环境光+平行光到场景中
+  scene.add(ambientLight, directionLight);
+}
+initLight();
 
 // 创建一个3D场景中的小球
 const sphereGeometry = new THREE.SphereGeometry(1, 32, 32);
