@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* 大盒子样式设置,注意大盒子必须要指定宽度,并且设置overflow属性为hidden */
+.container {
+  width: 200px;
+  margin: 0 auto;
+  margin-top: 200px;
+  height: 125px;
+  overflow: hidden;
+  background-color: rgba(0, 0, 0, 0.05);
+  text-align: center;
+}
+
+/* 大盒子的子元素,列表内容的父元素,设置滚动动画 */
+.scrollArea {
+  /* 设置里的动画时长根据不同的情况设置即可 */
+  animation: scroll 3s linear infinite;
+}
+
+/* 设置当鼠标悬停时,自动挺尸滚动 */
+.scrollArea:hover {
+  animation-play-state: paused;
+}
+
+/* 滚动动画 */
+@keyframes scroll {
+  0% {
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
