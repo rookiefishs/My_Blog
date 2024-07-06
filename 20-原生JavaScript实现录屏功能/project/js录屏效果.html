@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <button id="start">开始录制</button>
+    <button id="end">结束录制</button>
+    <script>
+      let recorder;
+      // 开始录制视频按钮点击事件
+      document.getElementById('start').addEventListener('click', function () {
+        // 获取当前屏幕,video:true表示获取屏幕,audio:true表示获取声音
+        navigator.mediaDevices.getDisplayMedia({ video: true, audio: true }).then(stream => {
+          // stream就是返回的视频流
+          // 使用MediaRecorder录制视频流
+          recorder = new MediaRecorder(stream);
+
+          // 定义data变量,用于存放视频数据
+          const data = [];
+
+          // 在ondataavailable(录制视频的时候触发)
+          recorder.ondataavailable = function (e) {
+            // 将视频数据添加到data中
+            data.push(e.data);
+          };
+
+          // onstop表示视频录制完毕
+          recorder.onstop = function () {
+            // 获取录制窗口并调用stop方法停止录制
+            this.stream.getTracks().forEach(track => track.stop());
+
+            // 将视频数据转化为blob对象
+            const blob = new Blob(data, { type: this.mimeType });
+
+            // 创建a标签(用于下载)
+            const a = document.createElement('a');
+
+            // 使用URL.createObjectURL给视频流创建链接
+            a.href = URL.createObjectURL(blob);
+
+            // 设置下载时的视频名称
+            a.download = new Date().getTime() + '.webm';
+
+            // 调用a标签的click方法下载视频
+            a.click();
+
+            // 使用URL.revokeObjectURL方法释放占用的资源
+            URL.revokeObjectURL(a.href);
+
+            // 删除a标签
+            a.remove();
+          };
+          // recorder.start()开始录制
+          recorder.start();
+        });
+      });
+      // 结束录制视频按钮点击事件
+      document.getElementById('end').addEventListener('click', function () {
+        // 停止录屏
+        recorder.stop();
+      });
+    </script>
+  </body>
+</html>
