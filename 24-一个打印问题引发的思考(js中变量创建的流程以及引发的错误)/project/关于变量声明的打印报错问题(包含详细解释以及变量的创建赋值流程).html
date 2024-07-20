@@ -1,0 +1,50 @@
+<!--
+ * @Author: wangZhiyu <w3209605851@163.com>
+ * @Date: 2024-07-19 17:32:22
+ * @LastEditTime: 2024-07-20 17:39:46
+ * @LastEditors: wangZhiyu <w3209605851@163.com>
+ * @Descripttion: 关于变量声明的打印报错问题(包含详细解释以及变量的创建赋值流程)
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>关于变量声明的打印报错问题(包含详细解释以及变量的创建赋值流程)</title>
+</head>
+
+<body>
+  <script>
+    // 以下代码打印什么?
+    // - 正常来看应该打印1,因为let不具有变量提升,所以b中的x应该应用最外层的全局作用域中的x
+    // - 实际打印时报错: Cannot access 'x' before initialization,意为 初始化前无法访问“x”
+    // - 为什么打印会报错?
+    // -- 1. 首先需要知道js创建一个变量的步骤
+    // --- 1.创建变量
+    // --- 2.初始化变量
+    // --- 3.赋值变量
+    // -- 2. 总所周知,var会存在变量提升的问题,而let与const不会存在,那么变量提升究竟提升的是什么? 变量提升的本质就是提升上面的第一步创建变量与第二部初始化变量
+    // -- 3. const和let虽然不会存在变量提升的特性,但是他们的第一步仍然会优先触发,类似于变量提升一样,按照如下 ECMA-262中14.3.1的 Let and Const Declarations NOTE 原文描述
+    /* 
+          let and const declarations define variables that are scoped to the running execution context’s LexicalEnvironment. The variables are created when their containing Lexical Environment is instantiated but may not be accessed in any way until the variable’s LexicalBinding is evaluated. A variable defined by a LexicalBinding with an Initializer is assigned the value of its Initializer’s AssignmentExpression when the LexicalBinding is evaluated, not when the variable is created. If a LexicalBinding in a let declaration does not have an Initializer the variable is assigned the value undefined when the LexicalBinding is evaluated.
+
+          let和const声明定义了在运行执行上下文的LexicalEnvironment范围内的变量.变量是在实例化其包含的词法环境时创建的,但在评估变量的词法绑定之前,不能以任何方式访问这些变量.当计算LexicalBinding时,而不是在创建变量时,为由具有初始化器的LexicalBinding定义的变量分配其初始化器AssignmentExpression的值.如果let声明中的LexicalBinding没有初始化器，则在计算LexicalBinding时，该变量将被赋予未定义的值。
+    */
+    // -- 4. 根据以上的解释,我们大概知道了,var会将步骤1:创建变量与步骤2:初始化变量提升到当前作用域的最上方,而let与const会因为语法的特性,不存在变量提升,但是会优先定义了在执行上下文中的变量(也就是优先执行了步骤1:创建变量与步骤)
+    // -- 5. 根据以上所有的解释,最终可以得到,虽然在a函数内部中声明x变量在调用b变量之后,但是x变量的创建会被js初始化函数的时候提升到当前作用域的最上方,虽然不会像var一样提升创建变量与初始化变量两个步骤,但是会因为函数初始化而执行步骤1:创建变量与步骤
+    // -- 6. 所以b函数执行的时候,获取到当前局部作用域中存在变量x,就不会去全局作用域中查找,但是这个x在在评估变量的词法绑定之前,不能以任何形式访问变量,也就是说x变量在剩下的两个步骤(初始化变量与赋值变量)完成之前(在完成之前这个变量也被称为 暂时性死区(TDZ)),是不能够访问的,所以就会报错!
+
+    let x = 1
+    function a() {
+      function b() {
+        console.log(x)
+      }
+      b()
+      let x = 2
+    }
+    a()
+  </script>
+</body>
+
+</html>
