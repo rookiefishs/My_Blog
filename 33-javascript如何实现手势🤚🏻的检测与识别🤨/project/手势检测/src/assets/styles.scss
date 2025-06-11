@@ -1,0 +1,60 @@
+body {
+  font-family: roboto;
+  margin: 2em;
+  background-color: #f0f0f0;
+  color: #3d3d3d;
+  --mdc-theme-primary: #007f8b;
+  --mdc-theme-on-primary: #f1f3f4;
+}
+
+h1 {
+  color: #007f8b;
+}
+
+h2 {
+  clear: both;
+}
+
+section {
+  opacity: 1;
+  transition: opacity 500ms ease-in-out;
+}
+
+// 通用css
+.title {
+  text-align: center;
+  margin-top: 20px;
+}
+
+#demos {
+  margin: 10px 0;
+}
+
+#demos img {
+  width: 650px;
+}
+
+.imgDistinguish {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  canvas {
+    top: 0%;
+    position: absolute;
+  }
+  img {
+    width: 45vw;
+    // margin: 0 20px;
+  }
+  .imgInfo {
+    p {
+      margin: 20px 0;
+    }
+  }
+}
+.imgDistinguishArea {
+  display: flex;
+  justify-content: space-around;
+}
