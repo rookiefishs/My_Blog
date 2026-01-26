@@ -1,0 +1,156 @@
+# 依赖文件
+node_modules/
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# 构建输出
+dist/
+build/
+out/
+*.tsbuildinfo
+
+# 开发服务器
+.vite/
+.cache/
+
+# IDE 和编辑器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+.env.local
+.env.*.local
+
+# 日志文件
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# 运行时数据
+pids/
+*.pid
+*.seed
+*.pid.lock
+
+# 临时文件
+tmp/
+temp/
+*.tmp
+
+# 操作系统文件
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Electron 相关
+electron-builder-effective-config.json
+dist_electron/
+release/
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 测试覆盖率
+coverage/
+.nyc_output/
+
+# 编译输出
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.exe
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+
+# 其他
+.history/
+.vuepress/dist
+dist_electron/
+release/
+*.rar
+*.zip
+*.7z
+*.tar.gz
+
+# 项目特定的忽略规则
+# 每个项目的 node_modules
+*/project/node_modules/
+*/project/dist/
+*/project/build/
+*/project/.vite/
+
+# 串口模拟器和驱动程序（大文件）
+*/串口模拟器/
+*/Virtual Serial Port Driver*/
+
+# 临时测试文件
+*.test.js
+*.spec.js
+test-results/
+
+# 大型模型文件（可选，如果需要）
+# *.glb
+# *.gltf
+# *.obj
+# *.mtl
+# *.fbx
+
+# IDE 特定文件
+.vscode/settings.json
+.vscode/extensions.json
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/dictionaries/
+.idea/vcs.xml
+.idea/jsLibraryMappings.xml
+.idea/modules.xml
+.idea/*.iml
+.idea/modules/
+*.iml
+
+# 系统文件
+.AppleDouble
+.LSOverride
+.TemporaryItems
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# 备份文件
+*.bak
+*.backup
+*~
+*.swp
+*.swo
+
+# 调试文件
+.debug
+debug.log
